@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Present Like Steve Jobs</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            color: #1a202c;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header p {
+            color: #718096;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        .progress-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .progress-bar {
+            background: #e2e8f0;
+            height: 8px;
+            width: 200px;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background: #3182ce;
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.3s ease;
+            width: 0%;
+        }
+
+        .progress-text {
+            color: #718096;
+            font-size: 0.9rem;
+        }
+
+        .secret-card {
+            border: 3px solid;
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 32px;
+            transition: all 0.3s ease;
+        }
+
+        .secret-card.orange { border-color: #fed7aa; background: #fef3e2; }
+        .secret-card.blue { border-color: #bfdbfe; background: #dbeafe; }
+        .secret-card.cyan { border-color: #a5f3fc; background: #cffafe; }
+        .secret-card.purple { border-color: #d8b4fe; background: #ede9fe; }
+        .secret-card.yellow { border-color: #fde68a; background: #fefce8; }
+        .secret-card.green { border-color: #bbf7d0; background: #dcfce7; }
+        .secret-card.red { border-color: #fecaca; background: #fef2f2; }
+
+        .secret-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .secret-icon {
+            width: 48px;
+            height: 48px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 16px;
+            font-size: 24px;
+        }
+
+        .secret-title {
+            font-size: 2rem;
+            color: #1a202c;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .secret-number {
+            color: #718096;
+            font-size: 1rem;
+        }
+
+        .secret-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+        }
+
+        @media (max-width: 768px) {
+            .secret-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .secret-description {
+            color: #4a5568;
+            margin-bottom: 24px;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .example-box, .tip-box {
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+
+        .example-box h4, .tip-box h4 {
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 8px;
+        }
+
+        .example-box p {
+            color: #4a5568;
+            font-style: italic;
+        }
+
+        .tip-box p {
+            color: #4a5568;
+        }
+
+        .exercise-section h3 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 500;
+            color: #4a5568;
+            margin-bottom: 8px;
+        }
+
+        .form-input, .form-textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+
+        .form-input:focus, .form-textarea:focus {
+            outline: none;
+            border-color: #3182ce;
+            box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.1);
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .three-inputs {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .story-inputs {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .story-input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .story-label {
+            font-weight: 500;
+            color: #4a5568;
+            font-size: 0.9rem;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+        }
+
+        .nav-button {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .nav-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .nav-button.prev {
+            background: #f7fafc;
+            color: #4a5568;
+        }
+
+        .nav-button.prev:hover:not(:disabled) {
+            background: #edf2f7;
+        }
+
+        .nav-button.next {
+            background: #3182ce;
+            color: white;
+        }
+
+        .nav-button.next:hover:not(:disabled) {
+            background: #2c5aa0;
+        }
+
+        .dots-container {
+            display: flex;
+            gap: 8px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .dot.active {
+            background: #3182ce;
+        }
+
+        .dot.completed {
+            background: #38a169;
+        }
+
+        .dot.inactive {
+            background: #cbd5e0;
+        }
+
+        .completion-card {
+            background: linear-gradient(135deg, #68d391 0%, #38a169 100%);
+            border: 3px solid #68d391;
+            border-radius: 16px;
+            padding: 32px;
+            text-align: center;
+            color: white;
+        }
+
+        .completion-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+            gap: 8px;
+        }
+
+        .completion-title {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .completion-subtitle {
+            margin-bottom: 24px;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .blueprint {
+            background: white;
+            color: #2d3748;
+            border-radius: 12px;
+            padding: 24px;
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .blueprint h4 {
+            font-weight: 600;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+
+        .blueprint-item {
+            margin-bottom: 12px;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .blueprint-item strong {
+            color: #2d3748;
+        }
+
+        .pro-tip {
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 8px;
+            padding: 16px;
+            margin-top: 12px;
+        }
+
+        .pro-tip p {
+            color: #2b6cb0;
+            font-size: 0.9rem;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>Present Like Steve Jobs</h1>
+            <p>Master the 7 secrets of legendary presentations</p>
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <span class="progress-text" id="progressText">0/7</span>
+            </div>
+        </div>
+
+        <!-- Secret Card -->
+        <div class="secret-card" id="secretCard">
+            <div class="secret-header">
+                <div class="secret-icon" id="secretIcon">💡</div>
+                <div>
+                    <h2 class="secret-title" id="secretTitle">Lead With the Big Idea</h2>
+                    <p class="secret-number" id="secretNumber">Secret #1</p>
+                </div>
+            </div>
+
+            <div class="secret-content">
+                <div>
+                    <p class="secret-description" id="secretDescription">
+                        Jobs opened with memorable quotes and framed everything with one big idea.
+                    </p>
+                    
+                    <div class="example-box">
+                        <h4>Example:</h4>
+                        <p id="secretExample">"Today, we reinvent the phone."</p>
+                    </div>
+
+                    <div class="tip-box">
+                        <h4>Pro Tip:</h4>
+                        <p id="secretTip">Start with one big idea. Short, sharp, memorable. If it can't fit on a T-shirt, make it simpler.</p>
+                    </div>
+                </div>
+
+                <div>
+                    <h3>Your Turn:</h3>
+                    <div id="exerciseContainer">
+                        <!-- Exercise content will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="navigation">
+            <button class="nav-button prev" id="prevButton" onclick="prevSecret()">
+                ← Previous
+            </button>
+
+            <div class="dots-container" id="dotsContainer">
+                <!-- Dots will be populated by JavaScript -->
+            </div>
+
+            <button class="nav-button next" id="nextButton" onclick="nextSecret()">
+                Next →
+            </button>
+        </div>
+
+        <!-- Completion Card -->
+        <div class="completion-card hidden" id="completionCard">
+            <div class="completion-header">
+                <span style="font-size: 2rem;">⭐</span>
+                <h3 class="completion-title">Congratulations!</h3>
+            </div>
+            <p class="completion-subtitle">
+                You've mastered all 7 secrets! You're ready to present like Steve Jobs.
+            </p>
+            <div class="blueprint">
+                <h4>Your Presentation Blueprint:</h4>
+                <div id="blueprintContent">
+                    <!-- Blueprint will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // App state
+        let currentSecret = 0;
+        let userInputs = {
+            bigIdea: '',
+            story: { problem: '', solution: '', impact: '' },
+            keyMessage: '',
+            numberContext: '',
+            threeThings: ['', '', ''],
+            rehearsalPlan: '',
+            oneMoreThing: ''
+        };
+
+        // Secrets data
+        const secrets = [
+            {
+                id: 1,
+                title: "Lead With the Big Idea",
+                icon: "💡",
+                color: "orange",
+                description: "Jobs opened with memorable quotes and framed everything with one big idea.",
+                example: "Today, we reinvent the phone.",
+                tip: "Start with one big idea. Short, sharp, memorable. If it can't fit on a T-shirt, make it simpler.",
+                exercise: "What's your presentation's big idea?"
+            },
+            {
+                id: 2,
+                title: "Tell a Powerful Story",
+                icon: "📖",
+                color: "blue",
+                description: "He told a story using Problem → Solution → Impact format.",
+                example: "Instead of specs, he showed how life gets better.",
+                tip: "Make it personal. Make them feel it.",
+                exercise: "Craft your story using Problem → Solution → Impact"
+            },
+            {
+                id: 3,
+                title: "Ditch the Bullet Points",
+                icon: "📄",
+                color: "cyan",
+                description: "Jobs never used slides full of text. He showed one idea per slide.",
+                example: "Sometimes just a word, number, or image.",
+                tip: "If your audience is reading, they're not listening.",
+                exercise: "What's your key message in 5 words or less?"
+            },
+            {
+                id: 4,
+                title: "Make Numbers Mean Something",
+                icon: "🔢",
+                color: "purple",
+                description: 'Don\'t just say "5GB of storage." Say "1,000 songs in your pocket."',
+                example: "Translate data into something real.",
+                tip: "Stats don't sell. Stories do.",
+                exercise: "How can you make your key number relatable?"
+            },
+            {
+                id: 5,
+                title: "Use the Rule of 3",
+                icon: "⭕",
+                color: "yellow",
+                description: "3 features. 3 benefits. 3 reasons. It's how our brains like to think.",
+                example: "It's faster. It's smarter. It just works.",
+                tip: "Simpler design. Smarter features. Seamless experience.",
+                exercise: "What are your 3 key points?"
+            },
+            {
+                id: 6,
+                title: "Rehearse Like a Pro",
+                icon: "🔁",
+                color: "green",
+                description: "Jobs made it look easy because he practiced endlessly.",
+                example: "Every word. Every gesture. Every beat.",
+                tip: "Spontaneity is often a well-rehearsed illusion. If you want to own the room, put in the reps.",
+                exercise: "What's your rehearsal plan?"
+            },
+            {
+                id: 7,
+                title: 'Build to a "One More Thing" Moment',
+                icon: "🎁",
+                color: "red",
+                description: "Jobs always saved a surprise. He teased it, built anticipation, then delivered.",
+                example: "Hold something back. Pause before the reveal. Let the silence sell the moment.",
+                tip: "Leave them wanting more.",
+                exercise: "What's your 'one more thing'?"
+            }
+        ];
+
+        // Initialize the app
+        function init() {
+            createDots();
+            updateUI();
+        }
+
+        function createDots() {
+            const dotsContainer = document.getElementById('dotsContainer');
+            dotsContainer.innerHTML = '';
+            
+            secrets.forEach((_, index) => {
+                const dot = document.createElement('div');
+                dot.className = 'dot inactive';
+                dot.onclick = () => goToSecret(index);
+                dotsContainer.appendChild(dot);
+            });
+        }
+
+        function updateUI() {
+            const secret = secrets[currentSecret];
+            
+            // Update secret card
+            document.getElementById('secretIcon').textContent = secret.icon;
+            document.getElementById('secretTitle').textContent = secret.title;
+            document.getElementById('secretNumber').textContent = `Secret #${secret.id}`;
+            document.getElementById('secretDescription').textContent = secret.description;
+            document.getElementById('secretExample').textContent = secret.example;
+            document.getElementById('secretTip').textContent = secret.tip;
+            
+            // Update card color
+            const secretCard = document.getElementById('secretCard');
+            secretCard.className = `secret-card ${secret.color}`;
+            
+            // Update exercise
+            updateExercise();
+            
+            // Update navigation
+            document.getElementById('prevButton').disabled = currentSecret === 0;
+            document.getElementById('nextButton').disabled = currentSecret === secrets.length - 1;
+            
+            // Update dots
+            updateDots();
+            
+            // Update progress
+            updateProgress();
+            
+            // Check completion
+            checkCompletion();
+        }
+
+        function updateExercise() {
+            const exerciseContainer = document.getElementById('exerciseContainer');
+            
+            switch (currentSecret) {
+                case 0:
+                    exerciseContainer.innerHTML = `
+                        <div class="form-group">
+                            <label class="form-label">Your Big Idea (one powerful sentence):</label>
+                            <textarea class="form-textarea" placeholder="Today, we..." 
+                                onchange="updateInput('bigIdea', this.value)" 
+                                oninput="updateInput('bigIdea', this.value)">${userInputs.bigIdea}</textarea>
+                        </div>
+                    `;
+                    break;
+                
+                case 1:
+                    exerciseContainer.innerHTML = `
+                        <div class="form-group">
+                            <h4 style="margin-bottom: 16px; color: #4a5568;">Problem → Solution → Impact</h4>
+                            <div class="story-inputs">
+                                <div class="story-input-group">
+                                    <label class="story-label">Problem:</label>
+                                    <input type="text" class="form-input" placeholder="What problem does your audience face?"
+                                        value="${userInputs.story.problem}"
+                                        onchange="updateStoryInput('problem', this.value)"
+                                        oninput="updateStoryInput('problem', this.value)" />
+                                </div>
+                                <div class="story-input-group">
+                                    <label class="story-label">Solution:</label>
+                                    <input type="text" class="form-input" placeholder="How do you solve it?"
+                                        value="${userInputs.story.solution}"
+                                        onchange="updateStoryInput('solution', this.value)"
+                                        oninput="updateStoryInput('solution', this.value)" />
+                                </div>
+                                <div class="story-input-group">
+                                    <label class="story-label">Impact:</label>
+                                    <input type="text" class="form-input" placeholder="How does life get better?"
+                                        value="${userInputs.story.impact}"
+                                        onchange="updateStoryInput('impact', this.value)"
+                                        oninput="updateStoryInput('impact', this.value)" />
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    break;
+                
+                case 2:
+                    exerciseContainer.innerHTML = `
+                        <div class="form-group">
+                            <label class="form-label">Your key message in 5 words or less:</label>
+                            <input type="text" class="form-input" placeholder="Revolutionary. Magical. Breakthrough."
+                                value="${userInputs.keyMessage}"
+                                onchange="updateInput('keyMessage', this.value)"
+                                oninput="updateInput('keyMessage', this.value)" />
+                            <p style="font-size: 0.9rem; color: #718096; margin-top: 8px;">Think: one powerful word, number, or image per slide</p>
+                        </div>
+                    `;
+                    break;
+                
+                case 3:
+                    exerciseContainer.innerHTML = `
+                        <div class="form-group">
+                            <label class="form-label">Turn your number into something relatable:</label>
+                            <div style="background: #f7fafc; padding: 16px; border-radius: 8px; margin-bottom: 16px;">
+                                <p style="font-size: 0.9rem; color: #4a5568;">Example: "5GB" → "1,000 songs in your pocket"</p>
+                            </div>
+                            <textarea class="form-textarea" placeholder="Instead of saying [number], say..."
+                                onchange="updateInput('numberContext', this.value)"
+                                oninput="updateInput('numberContext', this.value)">${userInputs.numberContext}</textarea>
+                        </div>
+                    `;
+                    break;
+                
+                case 4:
+                    exerciseContainer.innerHTML = `
+                        <div class="form-group">
+                            <label class="form-label">Your 3 key points:</label>
+                            <div class="three-inputs">
+                                <input type="text" class="form-input" placeholder="Point 1: It's..."
+                                    value="${userInputs.threeThings[0]}"
+                                    onchange="updateThreeThings(0, this.value)"
+                                    oninput="updateThreeThings(0, this.value)" />
+                                <input type="text" class="form-input" placeholder="Point 2: It's..."
+                                    value="${userInputs.threeThings[1]}"
+                                    onchange="updateThreeThings(1, this.value)"
+                                    oninput="updateThreeThings(1, this.value)" />
+                                <input type="text" class="form-input" placeholder="Point 3: It's..."
+                                    value="${userInputs.threeThings[2]}"
+                                    onchange="updateThreeThings(2, this.value)"
+                                    oninput="updateThreeThings(2, this.value)" />
+                            </div>
+                        </div>
+                    `;
+                    break;
+                
+                case 5:
+                    exerciseContainer.innerHTML = `
+                        <div class="form-group">
+                            <label class="form-label">Your rehearsal plan:</label>
+                            <textarea class="form-textarea" placeholder="How will you practice? When? How many times? What will you focus on?"
+                                onchange="updateInput('rehearsalPlan', this.value)"
+                                oninput="updateInput('rehearsalPlan', this.value)">${userInputs.rehearsalPlan}</textarea>
+                            <div class="pro-tip">
+                                <p>💡 Pro tip: Practice your transitions, gestures, and pauses—not just your words!</p>
+                            </div>
+                        </div>
+                    `;
+                    break;
+                
+                case 6:
+                    exerciseContainer.innerHTML = `
+                        <div class="form-group">
+                            <label class="form-label">Your "One More Thing" moment:</label>
+                            <textarea class="form-textarea" placeholder="What surprise will you save for the end?"
+                                onchange="updateInput('oneMoreThing', this.value)"
+                                oninput="updateInput('oneMoreThing', this.value)">${userInputs.oneMoreThing}</textarea>
+                            <div style="background: #fef2f2; padding: 16px; border-radius: 8px; margin-top: 12px;">
+                                <p style="color: #c53030; font-size: 0.9rem;">Remember: Tease it, build anticipation, then deliver!</p>
+                            </div>
+                        </div>
+                    `;
+                    break;
+            }
+        }
+
+        function updateInput(field, value) {
+            userInputs[field] = value;
+            updateProgress();
+            checkCompletion();
+        }
+
+        function updateStoryInput(field, value) {
+            userInputs.story[field] = value;
+            updateProgress();
+            checkCompletion();
+        }
+
+        function updateThreeThings(index, value) {
+            userInputs.threeThings[index] = value;
+            updateProgress();
+            checkCompletion();
+        }
+
+        function updateDots() {
+            const dots = document.querySelectorAll('.dot');
+            dots.forEach((dot, index) => {
+                dot.className = 'dot';
+                if (index === currentSecret) {
+                    dot.classList.add('active');
+                } else if (isSecretCompleted(index)) {
+                    dot.classList.add('completed');
+                } else {
+                    dot.classList.add('inactive');
+                }
+            });
+        }
+
+        function updateProgress() {
+            const completed = getCompletedCount();
+            const total = secrets.length;
+            const percentage = (completed / total) * 100;
+            
+            document.getElementById('progressFill').style.width = `${percentage}%`;
+            document.getElementById('progressText').textContent = `${completed}/${total}`;
+        }
+
+        function isSecretCompleted(index) {
+            switch (index) {
+                case 0: return userInputs.bigIdea.trim() !== '';
+                case 1: return userInputs.story.problem.trim() !== '' && 
+                              userInputs.story.solution.trim() !== '' && 
+                              userInputs.story.impact.trim() !== '';
+                case 2: return userInputs.keyMessage.trim() !== '';
+                case 3: return userInputs.numberContext.trim() !== '';
+                case 4: return userInputs.threeThings.filter(thing => thing.trim() !== '').length === 3;
+                case 5: return userInputs.rehearsalPlan.trim() !== '';
+                case 6: return userInputs.oneMoreThing.trim() !== '';
+                default: return false;
+            }
+        }
+
+        function getCompletedCount() {
+            return secrets.filter((_, index) => isSecretCompleted(index)).length;
+        }
+
+        function checkCompletion() {
+            const completed = getCompletedCount();
+            const total = secrets.length;
+            
+            if (completed === total) {
+                document.getElementById('completionCard').classList.remove('hidden');
+                updateBlueprint();
+            } else {
+                document.getElementById('completionCard').classList.add('hidden');
+            }
+        }
+
+        function updateBlueprint() {
+            const blueprintContent = document.getElementById('blueprintContent');
+            blueprintContent.innerHTML = `
+                <div class="blueprint-item"><strong>Big Idea:</strong> ${userInputs.bigIdea}</div>
+                <div class="blueprint-item"><strong>Story:</strong> ${userInputs.story.problem} → ${userInputs.story.solution} → ${userInputs.story.impact}</div>
+                <div class="blueprint-item"><strong>Key Message:</strong> ${userInputs.keyMessage}</div>
+                <div class="blueprint-item"><strong>Relatable Number:</strong> ${userInputs.numberContext}</div>
+                <div class="blueprint-item"><strong>Three Points:</strong> ${userInputs.threeThings.filter(t => t.trim()).join(', ')}</div>
+                <div class="blueprint-item"><strong>Rehearsal Plan:</strong> ${userInputs.rehearsalPlan}</div>
+                <div class="blueprint-item"><strong>One More Thing:</strong> ${userInputs.oneMoreThing}</div>
+            `;
+        }
+
+        function nextSecret() {
+            if (currentSecret < secrets.length - 1) {
+                currentSecret++;
+                updateUI();
+            }
+        }
+
+        function prevSecret() {
+            if (currentSecret > 0) {
+                currentSecret--;
+                updateUI();
+            }
+        }
+
+        function goToSecret(index) {
+            currentSecret = index;
+            updateUI();
+        }
+
+        // Initialize the app when the page loads
+        window.onload = init;
+    </script>
+</body>
+</html>
